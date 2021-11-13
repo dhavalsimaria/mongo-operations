@@ -17,22 +17,22 @@ public class CityController {
     }
 
     @GetMapping
-    public List<City> getAllCities() {
+    public List<City> getAll() {
         return cityService.getAllCities();
     }
 
     @PostMapping
-    public City createCity(@RequestBody City city) {
+    public City create(@RequestBody City city) {
         return cityService.createCity(city);
     }
 
     @PutMapping
-    public City updateCity(@RequestBody City city) {
+    public City update(@RequestBody City city) {
         return cityService.updateCity(city);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCity(@PathVariable("id") String id) {
+    public void delete(@PathVariable("id") String id) {
         cityService.deleteCityById(id);
     }
 }
