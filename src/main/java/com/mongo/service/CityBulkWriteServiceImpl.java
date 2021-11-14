@@ -16,7 +16,17 @@ public class CityBulkWriteServiceImpl implements CityBulkWriteService{
     }
 
     @Override
-    public Integer bulkWriteCities(List<City> cities) {
+    public Integer bulkInsertCities(List<City> cities) {
         return cityBulkWriteRepositoryImpl.bulkInsertCities(cities);
+    }
+
+    @Override
+    public Integer bulkDeleteCitiesUsingListOfIds(List<String> ids) {
+        return cityBulkWriteRepositoryImpl.bulkRemoveCitiesUsingListOfIds(ids);
+    }
+
+    @Override
+    public Integer bulkDeleteCitiesUsingListOfQueries(String id, String pinCode, String cityName) {
+        return cityBulkWriteRepositoryImpl.bulkRemoveCitiesUsingListOfQueries(id, pinCode, cityName);
     }
 }
