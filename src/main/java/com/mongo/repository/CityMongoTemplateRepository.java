@@ -5,7 +5,7 @@ import com.mongo.entity.City;
 import java.util.List;
 
 public interface CityMongoTemplateRepository {
-    /* Create operations */
+    /* Insert operations */
     City insertCity(City city);
 
     /* Update operations */
