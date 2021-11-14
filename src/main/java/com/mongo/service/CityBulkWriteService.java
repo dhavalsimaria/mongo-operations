@@ -5,5 +5,9 @@ import com.mongo.entity.City;
 import java.util.List;
 
 public interface CityBulkWriteService {
-    Integer bulkWriteCities(List<City> cities);
+    Integer bulkInsertCities(List<City> cities);
+
+    Integer bulkDeleteCitiesUsingListOfIds(List<String> ids);
+
+    Integer bulkDeleteCitiesUsingListOfQueries(String id, String pinCode, String cityName);
 }
