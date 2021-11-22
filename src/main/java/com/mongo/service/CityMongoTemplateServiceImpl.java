@@ -78,4 +78,9 @@ public class CityMongoTemplateServiceImpl implements CityMongoTemplateService{
     public City deleteCityAndGetDeletedCity(String id, City city) {
         return cityMongoTemplateRepository.deleteCityUsingFindAndModify(id, city);
     }
+
+    @Override
+    public List<City> getCitiesByTextSearch(String searchText) {
+        return cityMongoTemplateRepository.getCitiesByTextSearch(searchText);
+    }
 }

@@ -12,4 +12,9 @@ public interface CityBulkWriteRepository {
     Integer bulkRemoveCitiesUsingListOfIds(List<String> ids);
 
     Integer bulkRemoveCitiesUsingListOfQueries(String id, String pinCode, String cityName);
+
+    /* Bulk update operations */
+    Integer bulkUpdateCitiesUsingUpdateMulti(String id1, String cityName, String id2);
+
+    Integer bulkUpdateCitiesUsingUpdateOne(String id, String cityName, String pinCode);
 }

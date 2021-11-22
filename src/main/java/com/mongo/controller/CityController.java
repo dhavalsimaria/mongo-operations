@@ -26,13 +26,18 @@ public class CityController {
         return cityService.createCity(city);
     }
 
+    @PostMapping("/create-multiple")
+    public List<City> create(@RequestBody List<City> cities) {
+        return cityService.createMultipleCities(cities);
+    }
+
     @PutMapping
     public City update(@RequestBody City city) {
         return cityService.updateCity(city);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") String id) {
+    public void delete(@PathVariable String id) {
         cityService.deleteCityById(id);
     }
 }

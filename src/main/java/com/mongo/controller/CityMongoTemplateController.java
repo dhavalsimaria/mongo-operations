@@ -52,7 +52,7 @@ public class CityMongoTemplateController {
     }
 
     @DeleteMapping("/find-and-remove/{id}")
-    public void findAndRemove(@PathVariable("id") String id) {
+    public void findAndRemove(@PathVariable String id) {
         cityMongoTemplateService.deleteCityById(id);
     }
 
@@ -63,8 +63,13 @@ public class CityMongoTemplateController {
 
     /* Need to revisit this method */
     @DeleteMapping("/find-and-modify/{id}")
-    public City deleteUsingfindAndModify(@PathVariable("id") String id, @RequestBody City city) {
+    public City deleteUsingfindAndModify(@PathVariable String id, @RequestBody City city) {
         return cityMongoTemplateService.deleteCityAndGetDeletedCity(id, city);
+    }
+
+    @GetMapping("/text-search/{searchText}")
+    public List<City> getBySearchText(@PathVariable String searchText) {
+        return cityMongoTemplateService.getCitiesByTextSearch(searchText);
     }
 
 }

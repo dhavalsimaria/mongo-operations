@@ -10,4 +10,8 @@ public interface CityBulkWriteService {
     Integer bulkDeleteCitiesUsingListOfIds(List<String> ids);
 
     Integer bulkDeleteCitiesUsingListOfQueries(String id, String pinCode, String cityName);
+
+    Integer bulkUpdateMultipleCitiesUsingListOfQueries(String id1, String cityName, String id2);
+
+    Integer bulkUpdateOneCityUsingListOfQueries(String id, String cityName, String pinCode);
 }

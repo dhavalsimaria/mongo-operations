@@ -26,4 +26,6 @@ public interface CityMongoTemplateService {
     Long deleteAndGetDeleteCount(String cityName);
 
     City deleteCityAndGetDeletedCity(String id, City city);
+
+    List<City> getCitiesByTextSearch(String searchText);
 }
