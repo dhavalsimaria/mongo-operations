@@ -29,4 +29,14 @@ public class CityBulkWriteServiceImpl implements CityBulkWriteService{
     public Integer bulkDeleteCitiesUsingListOfQueries(String id, String pinCode, String cityName) {
         return cityBulkWriteRepositoryImpl.bulkRemoveCitiesUsingListOfQueries(id, pinCode, cityName);
     }
+
+    @Override
+    public Integer bulkUpdateMultipleCitiesUsingListOfQueries(String id1, String cityName, String id2) {
+        return cityBulkWriteRepositoryImpl.bulkUpdateCitiesUsingUpdateMulti(id1, cityName, id2);
+    }
+
+    @Override
+    public Integer bulkUpdateOneCityUsingListOfQueries(String id, String cityName, String pinCode) {
+        return cityBulkWriteRepositoryImpl.bulkUpdateCitiesUsingUpdateOne(id, cityName, pinCode);
+    }
 }

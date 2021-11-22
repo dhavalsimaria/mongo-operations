@@ -30,4 +30,14 @@ public class CityBulkWriteController {
     public Integer bulkDeleteUsingListOfQueries(@RequestParam String id, @RequestParam String pinCode, @RequestParam String cityName) {
         return cityBulkWriteService.bulkDeleteCitiesUsingListOfQueries(id, pinCode, cityName);
     }
+
+    @PutMapping("/list-of-queries/update-all")
+    public Integer bulkUpdateMultipleUsingListOfQueries(@RequestParam String id1, @RequestParam String cityName, @RequestParam String id2) {
+        return cityBulkWriteService.bulkUpdateMultipleCitiesUsingListOfQueries(id1, cityName, id2);
+    }
+
+    @PutMapping("/list-of-queries/update-first")
+    public Integer bulkUpdateOneUsingListOfQueries(@RequestParam String id, @RequestParam String cityName, @RequestParam String pinCode) {
+        return cityBulkWriteService.bulkUpdateOneCityUsingListOfQueries(id, cityName, pinCode);
+    }
 }

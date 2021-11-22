@@ -21,6 +21,11 @@ public class CityServiceImpl implements CityService{
     }
 
     @Override
+    public List<City> createMultipleCities(List<City> cities) {
+        return cityRepository.saveAll(cities);
+    }
+
+    @Override
     public City updateCity(City city) {
         /** Cover the both the cases where the city exist & does not already exist in database */
         /*

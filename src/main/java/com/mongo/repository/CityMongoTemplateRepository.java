@@ -5,7 +5,7 @@ import com.mongo.entity.City;
 import java.util.List;
 
 public interface CityMongoTemplateRepository {
-    /* Insert operations */
+    /* Insert operation */
     City insertCity(City city);
 
     /* Update operations */
@@ -20,7 +20,7 @@ public interface CityMongoTemplateRepository {
 
     String upsertCity(City city);
 
-    /* Get operations */
+    /* Get operation */
     List<City> getAllCitiesUsingFindAll();
 
     /* Delete operations */
@@ -29,4 +29,7 @@ public interface CityMongoTemplateRepository {
     Long deleteCityUsingRemove(String cityName);
 
     City deleteCityUsingFindAndModify(String id, City city);
+
+    /* Text search operations */
+    List<City> getCitiesByTextSearch(String searchText);
 }
