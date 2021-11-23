@@ -1,4 +1,4 @@
-# Mongo operations
+# Mongo operations in Java
 
 This repository contains Mongo operations in a Spring Boot project implemented using two approaches: 
 
