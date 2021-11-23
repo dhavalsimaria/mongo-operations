@@ -2,6 +2,7 @@ package com.mongo.controller;
 
 import com.mongo.entity.City;
 import com.mongo.service.CityService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,23 +18,23 @@ public class CityController {
     }
 
     @GetMapping
-    public List<City> getAll() {
-        return cityService.getAllCities();
+    public ResponseEntity<List<City>> getAll() {
+        return ResponseEntity.ok(cityService.getAllCities());
     }
 
     @PostMapping
-    public City create(@RequestBody City city) {
-        return cityService.createCity(city);
+    public ResponseEntity<City> create(@RequestBody City city) {
+        return ResponseEntity.ok(cityService.createCity(city));
     }
 
     @PostMapping("/create-multiple")
-    public List<City> create(@RequestBody List<City> cities) {
-        return cityService.createMultipleCities(cities);
+    public ResponseEntity<List<City>> create(@RequestBody List<City> cities) {
+        return ResponseEntity.ok(cityService.createMultipleCities(cities));
     }
 
     @PutMapping
-    public City update(@RequestBody City city) {
-        return cityService.updateCity(city);
+    public ResponseEntity<City> update(@RequestBody City city) {
+        return ResponseEntity.ok(cityService.updateCity(city));
     }
 
     @DeleteMapping("/{id}")
