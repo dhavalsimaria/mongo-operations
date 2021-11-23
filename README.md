@@ -21,7 +21,7 @@ This repository contains Mongo operations in a Spring Boot project implemented u
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 <h2> :flashlight: Scope of implementation</h2>
-<p>The implementation is aimed at helping people learning Mongo operations in Java using Spring Boot framework and hence the code structure is kept as simple as possible. Exception Handling, Unit tests, Integration tests are not yet implemented and will be added gradually.</p>
+<p>The implementation is aimed at helping people learning Mongo operations in Java using Spring Boot framework and hence the code structure is kept as simple as possible. Exception Handling, Unit tests, Integration tests, Swagger documentation, etc, are not yet implemented and will be added gradually.</p>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
