@@ -2,6 +2,7 @@ package com.mongo.controller;
 
 import com.mongo.entity.City;
 import com.mongo.service.CityMongoTemplateService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,38 +18,38 @@ public class CityMongoTemplateController {
     }
 
     @GetMapping
-    public List<City> getAll() {
-        return cityMongoTemplateService.getAllCities();
+    public ResponseEntity<List<City>> getAll() {
+        return ResponseEntity.ok(cityMongoTemplateService.getAllCities());
     }
 
     @PostMapping("/insert")
-    public City createUsingInsert(@RequestBody City city) {
-        return cityMongoTemplateService.insertCity(city);
+    public ResponseEntity<City> createUsingInsert(@RequestBody City city) {
+        return ResponseEntity.ok(cityMongoTemplateService.insertCity(city));
     }
 
     @PutMapping("/save")
-    public City createOrUpdate(@RequestBody City city) {
-        return cityMongoTemplateService.saveCity(city);
+    public ResponseEntity<City> createOrUpdate(@RequestBody City city) {
+        return ResponseEntity.ok(cityMongoTemplateService.saveCity(city));
     }
 
     @PutMapping("/update-all")
-    public Long updateAllAndGetUpdatedCount(@RequestParam String cityOldName, @RequestParam String cityNewName) {
-        return cityMongoTemplateService.updateAllCityNamesAndGetUpdatedCount(cityOldName, cityNewName);
+    public ResponseEntity<Long> updateAllAndGetUpdatedCount(@RequestParam String cityOldName, @RequestParam String cityNewName) {
+        return ResponseEntity.ok(cityMongoTemplateService.updateAllCityNamesAndGetUpdatedCount(cityOldName, cityNewName));
     }
 
     @PutMapping("/update-first")
-    public Long updateFirstAndGetUpdatedCount(@RequestParam String cityOldName, @RequestParam String cityNewName) {
-        return cityMongoTemplateService.updateFirstCityNameAndGetUpdatedCount(cityOldName, cityNewName);
+    public ResponseEntity<Long> updateFirstAndGetUpdatedCount(@RequestParam String cityOldName, @RequestParam String cityNewName) {
+        return ResponseEntity.ok(cityMongoTemplateService.updateFirstCityNameAndGetUpdatedCount(cityOldName, cityNewName));
     }
 
     @PutMapping("/find-and-modify")
-    public City findAndModifyCityName(@RequestParam String cityOldName, @RequestParam String cityNewName) {
-        return cityMongoTemplateService.findAndModifyCityName(cityOldName, cityNewName);
+    public ResponseEntity<City> findAndModifyCityName(@RequestParam String cityOldName, @RequestParam String cityNewName) {
+        return ResponseEntity.ok(cityMongoTemplateService.findAndModifyCityName(cityOldName, cityNewName));
     }
 
     @PutMapping("/upsert")
-    public String upsert(@RequestBody City city) {
-        return cityMongoTemplateService.upsertCity(city);
+    public ResponseEntity<String> upsert(@RequestBody City city) {
+        return ResponseEntity.ok(cityMongoTemplateService.upsertCity(city));
     }
 
     @DeleteMapping("/find-and-remove/{id}")
@@ -57,19 +58,19 @@ public class CityMongoTemplateController {
     }
 
     @DeleteMapping("/remove")
-    public Long remove(@RequestParam String cityName) {
-        return cityMongoTemplateService.deleteAndGetDeleteCount(cityName);
+    public ResponseEntity<Long> remove(@RequestParam String cityName) {
+        return ResponseEntity.ok(cityMongoTemplateService.deleteAndGetDeleteCount(cityName));
     }
 
     /* Need to revisit this method */
     @DeleteMapping("/find-and-modify/{id}")
-    public City deleteUsingfindAndModify(@PathVariable String id, @RequestBody City city) {
-        return cityMongoTemplateService.deleteCityAndGetDeletedCity(id, city);
+    public ResponseEntity<City> deleteUsingfindAndModify(@PathVariable String id, @RequestBody City city) {
+        return ResponseEntity.ok(cityMongoTemplateService.deleteCityAndGetDeletedCity(id, city));
     }
 
     @GetMapping("/text-search/{searchText}")
-    public List<City> getBySearchText(@PathVariable String searchText) {
-        return cityMongoTemplateService.getCitiesByTextSearch(searchText);
+    public ResponseEntity<List<City>> getBySearchText(@PathVariable String searchText) {
+        return ResponseEntity.ok(cityMongoTemplateService.getCitiesByTextSearch(searchText));
     }
 
 }

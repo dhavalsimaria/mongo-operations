@@ -37,6 +37,6 @@ public class City {
 
     @Field("pin_code")
     //@Indexed(unique = true)
-    //@TextIndexed
+    @TextIndexed
     private String pinCode;
 }
