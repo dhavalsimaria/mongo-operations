@@ -22,11 +22,22 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
         this.mongoTemplate = mongoTemplate;
     }
 
+    /**
+     * Bulk insert operation in 'Ordered' mode, which means method takes a list of cities and inserts them in the database in ordered manner.
+     * It returns the count of cities persisted in database.
+     *
+     * @param cities  list of cities to be inserted, not null
+     * @return count of inserted cities
+     */
     @Override
     public Integer bulkInsertCities(List<City> cities) {
         return mongoTemplate.bulkOps(BulkOperations.BulkMode.ORDERED, City.class).insert(cities).execute().getInsertedCount();
     }
 
+    /**
+     * @param ids
+     * @return
+     */
     @Override
     public Integer bulkRemoveCitiesUsingListOfIds(List<String> ids) {
         Query bulkRemoveQuery = new Query().addCriteria(Criteria.where("_id").in(ids));
@@ -34,6 +45,12 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
         return mongoTemplate.bulkOps(BulkOperations.BulkMode.ORDERED, City.class).remove(bulkRemoveQuery).execute().getDeletedCount();
     }
 
+    /**
+     * @param id
+     * @param pinCode
+     * @param cityName
+     * @return
+     */
     @Override
     public Integer bulkRemoveCitiesUsingListOfQueries(String id, String pinCode, String cityName) {
         Query bulkRemoveQuery1 = new Query().addCriteria(Criteria.where("_id").in(id));
@@ -45,6 +62,12 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
         return mongoTemplate.bulkOps(BulkOperations.BulkMode.ORDERED, City.class).remove(bulkRemoveQueries).execute().getDeletedCount();
     }
 
+    /**
+     * @param id1
+     * @param cityName
+     * @param id2
+     * @return
+     */
     @Override
     public Integer bulkUpdateCitiesUsingUpdateMulti(String id1, String cityName, String id2) {
         Query bulkUpdateQuery1 = new Query().addCriteria(Criteria.where("_id").in(id1));
@@ -61,6 +84,12 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
         return mongoTemplate.bulkOps(BulkOperations.BulkMode.ORDERED, City.class).updateMulti(updates).execute().getModifiedCount();
     }
 
+    /**
+     * @param id
+     * @param cityName
+     * @param pinCode
+     * @return
+     */
     @Override
     public Integer bulkUpdateCitiesUsingUpdateOne(String id, String cityName, String pinCode) {
         Query bulkUpdateQuery1 = new Query().addCriteria(Criteria.where("_id").in(id));
