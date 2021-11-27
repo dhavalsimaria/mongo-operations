@@ -24,7 +24,7 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
 
     /**
      * Bulk insert operation in 'Ordered' mode, which means method takes a list of cities and inserts them in the database in ordered manner.
-     * It returns the count of cities persisted in database.
+     * Method returns the count of cities persisted in database.
      *
      * @param cities  list of cities to be inserted, not null
      * @return count of inserted cities
@@ -35,6 +35,9 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
     }
 
     /**
+     * Bulk remove operation which removes documents based on a list of document ids.
+     * Method returns the count of cities removed from the database.
+     *
      * @param ids
      * @return
      */
@@ -46,10 +49,14 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
     }
 
     /**
-     * @param id
-     * @param pinCode
-     * @param cityName
-     * @return
+     * Bulk remove operation which takes 3 inputs parameters that are used with 3 different queries.
+     * All documents that satisfy any of the 3 queries are removed.
+     * Method returns the count of cities removed from the database.
+     *
+     * @param id - To be used with first query
+     * @param pinCode - To be used with second query
+     * @param cityName - To be used with third query
+     * @return count of cities removed
      */
     @Override
     public Integer bulkRemoveCitiesUsingListOfQueries(String id, String pinCode, String cityName) {
@@ -63,10 +70,15 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
     }
 
     /**
-     * @param id1
-     * @param cityName
-     * @param id2
-     * @return
+     * Bulk updateMulti operation which takes 3 inputs parameters that are used with 3 different queries.
+     * 'All' documents that satisfy any one of the 3 queries are updated.
+     * Update for all three queries are mutually exclusive, i.e. a document do not have to satisfy multiple queries
+     * Method returns the count of cities updated in database.
+     *
+     * @param id1 - To be used with first query
+     * @param cityName - To be used with second query
+     * @param id2 - To be used with third query
+     * @returncount of cities updated
      */
     @Override
     public Integer bulkUpdateCitiesUsingUpdateMulti(String id1, String cityName, String id2) {
@@ -85,9 +97,15 @@ public class CityBulkWriteRepositoryImpl implements CityBulkWriteRepository{
     }
 
     /**
-     * @param id
-     * @param cityName
-     * @param pinCode
+     * Bulk updateOne operation which takes 3 inputs parameters that are used with 3 different queries.
+     * 'First' document that satisfies each query individually will be updated.
+     * Update for all three queries are mutually exclusive, i.e. a document do not have to satisfy multiple queries
+     * Method returns the count of cities updated in database.
+     *
+     *
+     * @param id - To be used with first query
+     * @param cityName - To be used with second query
+     * @param pinCode - To be used with third query
      * @return
      */
     @Override
