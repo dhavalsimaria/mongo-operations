@@ -29,7 +29,10 @@ This repository contains Mongo operations in a Spring Boot project implemented u
 <h2> :books: References</h2>
 <ul>
   <li>
-    <p><a href="https://spring.io/blog/2014/07/17/text-search-your-documents-with-spring-data-mongodb">Spring Docs - Text Search</a></p>
+    <p><a href="https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#reference">Spring Data MongoDB - Reference Documentation</a></p>
+  </li>
+  <li>
+    <p><a href="https://spring.io/blog/2014/07/17/text-search-your-documents-with-spring-data-mongodb">Spring Blog - Text Search</a></p>
   </li>
   <li>
       <p><a href="https://docs.mongodb.com/manual/reference/method/db.collection.bulkWrite/#db.collection.bulkwrite--">MongoDB BulkWrite Documentation</a></p>
