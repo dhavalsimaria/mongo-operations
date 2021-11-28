@@ -1,6 +1,8 @@
 package com.mongo.controller;
 
 import com.mongo.entity.City;
+import com.mongo.entity.CityDTO;
+import com.mongo.entity.Coordinates;
 import com.mongo.service.CityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +25,8 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<City> create(@RequestBody City city) {
-        return ResponseEntity.ok(cityService.createCity(city));
+    public ResponseEntity<City> create(@RequestBody CityDTO cityDTO) {
+        return ResponseEntity.ok(cityService.createCity(cityDTO));
     }
 
     @PostMapping("/create-multiple")
@@ -40,5 +42,15 @@ public class CityController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
         cityService.deleteCityById(id);
+    }
+
+    @DeleteMapping
+    public void deleteAll() {
+        cityService.deleteAll();
+    }
+
+    @GetMapping("/find-locations")
+    public ResponseEntity<List<City>> findLocationsWithinPolygon(@RequestBody List<Coordinates> polygonCoordinates) {
+        return ResponseEntity.ok(cityService.findByCoordinatesWithin(polygonCoordinates));
     }
 }

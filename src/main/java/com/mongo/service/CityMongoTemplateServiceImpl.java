@@ -25,16 +25,6 @@ public class CityMongoTemplateServiceImpl implements CityMongoTemplateService{
         return cityMongoTemplateRepository.insertCity(city);
     }
 
-    /*@Override
-    public City updateCityUsingSave(City city) {
-        *//** Cover the both the cases where the city exist & does not already exist in database *//*
-        *//*
-        if(city.getId() != null & cityRepository.existsById(city.getId())) {
-            return cityRepository.save(city);
-        }*//*
-        return cityMongoTemplateRepository.saveCity(city);
-    }*/
-
     @Override
     public Long updateAllCityNamesAndGetUpdatedCount(String oldCityName, String newCityName) {
         return cityMongoTemplateRepository.updateCityNameUsingUpdateMulti(oldCityName, newCityName);
@@ -52,10 +42,7 @@ public class CityMongoTemplateServiceImpl implements CityMongoTemplateService{
 
     @Override
     public String upsertCity(City city) {
-        //return cityMongoTemplateRepository.upsertCity(city);
-        String upsertedId = cityMongoTemplateRepository.upsertCity(city);
-        System.out.println("Upserted id: " + upsertedId);
-        return upsertedId;
+        return cityMongoTemplateRepository.upsertCity(city);
     }
 
     @Override
