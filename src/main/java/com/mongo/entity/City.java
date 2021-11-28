@@ -2,7 +2,8 @@ package com.mongo.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -39,4 +40,7 @@ public class City {
     //@Indexed(unique = true)
     @TextIndexed
     private String pinCode;
+
+    @GeoSpatialIndexed
+    private Point coordinates;
 }

@@ -1,0 +1,622 @@
+{
+	"info": {
+		"_postman_id": "ce42801b-3d15-40df-b149-f8004cf7fbe7",
+		"name": "Mongo Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Using Mongo Template",
+			"item": [
+				{
+					"name": "Get All Cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert City",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cityName\": \"Calcutta\",\r\n    \"pinCode\": \"700003\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/insert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save City",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"618f9beb4c5a3e6db0e1da0e\",\r\n    \"cityName\": \"Prayagraj\",\r\n    \"pinCode\": \"211001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upsert City",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cityName\": \"my old city name\",\r\n    \"pinCode\": \"919191\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/upsert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"upsert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update first and get updated Count",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/update-first?cityOldName=Calcutta&cityNewName=Kolkata",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"update-first"
+							],
+							"query": [
+								{
+									"key": "cityOldName",
+									"value": "Calcutta"
+								},
+								{
+									"key": "cityNewName",
+									"value": "Kolkata"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update All and get updated count",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/update-all?cityOldName=Calcutta&cityNewName=Kolkata",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"update-all"
+							],
+							"query": [
+								{
+									"key": "cityOldName",
+									"value": "Calcutta"
+								},
+								{
+									"key": "cityNewName",
+									"value": "Kolkata"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find-and-Modify and return new object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/find-and-modify?cityOldName=Allahabad&cityNewName=Ayodhya",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"find-and-modify"
+							],
+							"query": [
+								{
+									"key": "cityOldName",
+									"value": "Allahabad"
+								},
+								{
+									"key": "cityNewName",
+									"value": "Ayodhya"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find and Remove City",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/find-and-remove/618f98c29f81a74126524803",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"find-and-remove",
+								"618f98c29f81a74126524803"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove and get removed count",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/remove?cityName=Bombay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"remove"
+							],
+							"query": [
+								{
+									"key": "cityName",
+									"value": "Bombay"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find-&-Modify with 'Remove' enabled",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cityName\": \"Kolkata\",\r\n    \"pinCode\": \"700002\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/find-and-modify/618f9ce44c5a3e6db0e1da0f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"find-and-modify",
+								"618f9ce44c5a3e6db0e1da0f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Text-search using Mongo Template",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mongo-template/city/text-search/Pune",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mongo-template",
+								"city",
+								"text-search",
+								"Pune"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Using Spring Data Mongo",
+			"item": [
+				{
+					"name": "Create multiple cities using 'Save All' method",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"cityName\": \"Ahmedabad\",\r\n        \"pinCode\": \"380001\",\r\n        \"coordinates\": {\r\n            \"latitude\": 4.0,\r\n            \"longitude\": 1.0\r\n        }\r\n    },\r\n    {\r\n        \"cityName\": \"Pune\",\r\n        \"pinCode\": \"411057\",\r\n        \"coordinates\": {\r\n            \"latitude\": -3.0,\r\n            \"longitude\": 2.0\r\n        }\r\n    },\r\n    {\r\n        \"cityName\": \"Pune\",\r\n        \"pinCode\": \"411004\",\r\n        \"coordinates\": {\r\n            \"latitude\": -3.0,\r\n            \"longitude\": 2.5\r\n        }\r\n    },\r\n    {\r\n        \"cityName\": \"Pune Corporation\",\r\n        \"pinCode\": \"411002\",\r\n        \"coordinates\": {\r\n            \"latitude\": -3.0,\r\n            \"longitude\": 4.0\r\n        }\r\n    },\r\n    {\r\n        \"cityName\": \"Old Pune\",\r\n        \"pinCode\": \"411001\",\r\n        \"coordinates\": {\r\n            \"latitude\": -3.0,\r\n            \"longitude\": 3.0\r\n        }\r\n    },\r\n    {\r\n        \"cityName\": \"Jaipur\",\r\n        \"pinCode\": \"302001\",\r\n        \"coordinates\": {\r\n            \"latitude\": -2.0,\r\n            \"longitude\": -2.0\r\n        }\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/city/create-multiple",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city",
+								"create-multiple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all the cities using 'deleteAll()' method",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a single city",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"cityName\": \"Ahmedabad\",\r\n        \"pinCode\": \"380001\",\r\n        \"coordinates\": {\r\n            \"latitude\": 4.0,\r\n            \"longitude\": 1.0\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find locations withing a Polygon",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"latitude\": 5.0,\r\n        \"longitude\": 0.0\r\n    },\r\n    {\r\n        \"latitude\": -0.2,\r\n        \"longitude\": 0.2\r\n    },\r\n    {\r\n        \"latitude\": 2.0,\r\n        \"longitude\": 1.0\r\n    },\r\n    {\r\n        \"latitude\": -3.0,\r\n        \"longitude\": 2.5\r\n    },\r\n    {\r\n        \"latitude\": 0.5,\r\n        \"longitude\": 2.0\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/city/find-locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city",
+								"find-locations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Using Bulk-Write operations",
+			"item": [
+				{
+					"name": "Bulk-Insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"cityName\": \"Ahmedabad\",\r\n        \"pinCode\": \"380001\"\r\n    },\r\n    {\r\n        \"cityName\": \"Pune\",\r\n        \"pinCode\": \"411057\"\r\n    },\r\n    {\r\n        \"cityName\": \"Jaipur\",\r\n        \"pinCode\": \"302001\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/bulk-write/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bulk-write",
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk delete using list of objects ('ids' in this case)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    \"61912c8f765c961d275cb513\",\r\n    \"61912c8f765c961d275cb512\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/bulk-write/city/list-of-ids",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bulk-write",
+								"city",
+								"list-of-ids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk delete using list of queries",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bulk-write/city/list-of-queries?id=61912c8f765c961d275cb511&pinCode=211001&cityName=Kolkata",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bulk-write",
+								"city",
+								"list-of-queries"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "61912c8f765c961d275cb511"
+								},
+								{
+									"key": "pinCode",
+									"value": "211001"
+								},
+								{
+									"key": "cityName",
+									"value": "Kolkata"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Update-Multi using list of queries",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bulk-write/city/list-of-queries/update-all?id1=619903caea3a0008f10f57fe&cityName=Pune&id2=619903caea3a0008f10f57fb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bulk-write",
+								"city",
+								"list-of-queries",
+								"update-all"
+							],
+							"query": [
+								{
+									"key": "id1",
+									"value": "619903caea3a0008f10f57fe"
+								},
+								{
+									"key": "cityName",
+									"value": "Pune"
+								},
+								{
+									"key": "id2",
+									"value": "619903caea3a0008f10f57fb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Update-One using list of queries",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bulk-write/city/list-of-queries/update-first?id=619903caea3a0008f10f57fb&cityName=Pune&pinCode=302001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bulk-write",
+								"city",
+								"list-of-queries",
+								"update-first"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "619903caea3a0008f10f57fb"
+								},
+								{
+									"key": "cityName",
+									"value": "Pune"
+								},
+								{
+									"key": "pinCode",
+									"value": "302001"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

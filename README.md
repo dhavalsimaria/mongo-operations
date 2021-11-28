@@ -17,6 +17,9 @@ This repository contains Mongo operations in a Spring Boot project implemented u
   <li>
     <p>MongoDB 5.0.3</p>
   </li>
+  <li>
+    <p>Maven 3.6.1</p>
+  </li>
 </ul>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
