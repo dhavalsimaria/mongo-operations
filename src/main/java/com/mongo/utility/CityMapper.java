@@ -7,6 +7,11 @@ import org.springframework.data.geo.Point;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * We cannot provide a 'Point' type input in API request.
+ * Hence we have created a DTO class CityDTO containing 'latitude' and 'Longitude' fields.
+ * This class is used to map CityDTO to City.
+ */
 public class CityMapper {
 
     public static City mapCityToCityDTO(CityDTO cityDTO) {
