@@ -23,14 +23,12 @@ public class CityServiceImpl implements CityService{
 
     @Override
     public City createCity(CityDTO cityDTO) {
-        //City city = new City(null == cityDTO.getId() ? null : cityDTO.getId(), cityDTO.getCityName(), cityDTO.getPinCode(), new Point(cityDTO.getCoordinates().getLatitude(), cityDTO.getCoordinates().getLongitude()));
-        City city = CityMapper.mapCityToCityDTO(cityDTO);
-        return cityRepository.save(city);
+        return cityRepository.save(CityMapper.mapCityToCityDTO(cityDTO));
     }
 
     @Override
-    public List<City> createMultipleCities(List<City> cities) {
-        return cityRepository.saveAll(cities);
+    public List<City> createMultipleCities(List<CityDTO> cityDTOs) {
+        return cityRepository.saveAll(CityMapper.mapCitiesToCityDTOs(cityDTOs));
     }
 
     @Override

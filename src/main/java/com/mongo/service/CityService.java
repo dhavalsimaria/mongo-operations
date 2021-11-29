@@ -9,7 +9,7 @@ import java.util.List;
 public interface CityService {
     City createCity(CityDTO cityDTO);
 
-    List<City> createMultipleCities(List<City> cities);
+    List<City> createMultipleCities(List<CityDTO> cityDTOs);
 
     City updateCity(City city);
 

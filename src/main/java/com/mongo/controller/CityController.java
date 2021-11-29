@@ -30,8 +30,8 @@ public class CityController {
     }
 
     @PostMapping("/create-multiple")
-    public ResponseEntity<List<City>> create(@RequestBody List<City> cities) {
-        return ResponseEntity.ok(cityService.createMultipleCities(cities));
+    public ResponseEntity<List<City>> create(@RequestBody List<CityDTO> cityDTOs) {
+        return ResponseEntity.ok(cityService.createMultipleCities(cityDTOs));
     }
 
     @PutMapping
