@@ -70,12 +70,25 @@ public class CityMongoTemplateRepositoryImpl implements CityMongoTemplateReposit
         return mongoTemplate.findAll(City.class);
     }
 
+    /**
+     * Method to delete documents using 'find & remove' method.
+     * This method does not return any value
+     *
+     * @param id - id value to filter the document to be deleted based on 'id' field
+     */
     @Override
     public void deleteCityByIdUsingFindAndRemove(String id) {
         Query deleteQuery = new Query().addCriteria(Criteria.where("_id").is(id));
         mongoTemplate.findAndRemove(deleteQuery, City.class);
     }
 
+    /**
+     * Method to delete documents using 'remove' method.
+     * Unlike 'find & remove' method, 'remove' method returns the count of deleted documents.
+     *
+     * @param inputCityName - city name value to filter the document to be deleted based on 'cityName' field
+     * @return - count of deleted documents
+     */
     @Override
     public Long deleteCityUsingRemove(String inputCityName) {
         Query deleteQuery = new Query().addCriteria(Criteria.where("cityName").is(inputCityName));
@@ -98,6 +111,13 @@ public class CityMongoTemplateRepositoryImpl implements CityMongoTemplateReposit
         return mongoTemplate.findAndModify(deleteQuery, updateDefinition, options, City.class);
     }
 
+    /**
+     * This method is used to find all the documents that contain given search text in fields
+     * that are indexed with '@TextIndexed' type of index.
+     *
+     * @param searchText - Text used to search in the TextIndexed fields
+     * @return - all documents containing matching search text
+     */
     @Override
     public List<City> getCitiesByTextSearch(String searchText) {
         TextCriteria searchCriteria = TextCriteria.forDefaultLanguage().matchingAny(searchText);
