@@ -1,7 +1,9 @@
 package com.mongo.service;
 
 import com.mongo.entity.City;
+import com.mongo.entity.CityDTO;
 import com.mongo.repository.CityMongoTemplateRepository;
+import com.mongo.utility.CityMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +18,13 @@ public class CityMongoTemplateServiceImpl implements CityMongoTemplateService{
     }
 
     @Override
-    public City saveCity(City city) {
-        return cityMongoTemplateRepository.saveCity(city);
+    public City saveCity(CityDTO cityDTO) {
+        return cityMongoTemplateRepository.saveCity(CityMapper.mapCityToCityDTO(cityDTO));
     }
 
     @Override
-    public City insertCity(City city) {
-        return cityMongoTemplateRepository.insertCity(city);
+    public City insertCity(CityDTO cityDTO) {
+        return cityMongoTemplateRepository.insertCity(CityMapper.mapCityToCityDTO(cityDTO));
     }
 
     @Override
@@ -41,8 +43,13 @@ public class CityMongoTemplateServiceImpl implements CityMongoTemplateService{
     }
 
     @Override
-    public String upsertCity(City city) {
-        return cityMongoTemplateRepository.upsertCity(city);
+    public City findAndReplaceUsingCityName(String oldCityName, CityDTO newCityDTO) {
+        return cityMongoTemplateRepository.updateUsingFindAndReplace(oldCityName, CityMapper.mapCityToCityDTO(newCityDTO));
+    }
+
+    @Override
+    public String upsertCity(CityDTO cityDTO) {
+        return cityMongoTemplateRepository.upsertCity(CityMapper.mapCityToCityDTO(cityDTO));
     }
 
     @Override

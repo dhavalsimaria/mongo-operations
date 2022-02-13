@@ -1,13 +1,14 @@
 package com.mongo.service;
 
 import com.mongo.entity.City;
+import com.mongo.entity.CityDTO;
 
 import java.util.List;
 
 public interface CityMongoTemplateService {
-    City saveCity(City city);
+    City saveCity(CityDTO cityDTO);
 
-    City insertCity(City city);
+    City insertCity(CityDTO cityDTO);
 
     /*City updateCityUsingSave(City city);*/
 
@@ -17,7 +18,9 @@ public interface CityMongoTemplateService {
 
     City findAndModifyCityName(String oldCityName, String newCityName);
 
-    String upsertCity(City city);
+    City findAndReplaceUsingCityName(String oldCityName, CityDTO newCityDTOy);
+
+    String upsertCity(CityDTO cityDTO);
 
     List<City> getAllCities();
 
