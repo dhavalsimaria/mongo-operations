@@ -32,13 +32,13 @@ public class CityServiceImpl implements CityService{
     }
 
     @Override
-    public City updateCity(City city) {
+    public City updateCity(CityDTO cityDTO) {
         /** Cover the both the cases where the city exist & does not already exist in database */
         /*
         if(city.getId() != null & cityRepository.existsById(city.getId())) {
             return cityRepository.save(city);
         }*/
-        return cityRepository.save(city);
+        return cityRepository.save(CityMapper.mapCityToCityDTO(cityDTO));
     }
 
     @Override

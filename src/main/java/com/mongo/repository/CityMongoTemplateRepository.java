@@ -1,6 +1,7 @@
 package com.mongo.repository;
 
 import com.mongo.entity.City;
+import com.mongo.entity.CityDTO;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public interface CityMongoTemplateRepository {
     Long updateCityNameUsingUpdateFirst(String oldCityName, String newCityName);
 
     City updateCityNameUsingFindAndModify(String oldCityName, String newCityName);
+
+    City updateUsingFindAndReplace(String oldCityName, City newCity);
 
     /* Update if exists, else Create */
     City saveCity(City city);

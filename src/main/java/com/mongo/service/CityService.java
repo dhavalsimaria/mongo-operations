@@ -11,7 +11,7 @@ public interface CityService {
 
     List<City> createMultipleCities(List<CityDTO> cityDTOs);
 
-    City updateCity(City city);
+    City updateCity(CityDTO cityDTO);
 
     List<City> getAllCities();
 

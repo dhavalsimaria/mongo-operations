@@ -1,7 +1,8 @@
 package com.mongo.service;
 
-import com.mongo.entity.City;
+import com.mongo.entity.CityDTO;
 import com.mongo.repository.CityBulkWriteRepositoryImpl;
+import com.mongo.utility.CityMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class CityBulkWriteServiceImpl implements CityBulkWriteService{
     }
 
     @Override
-    public Integer bulkInsertCities(List<City> cities) {
-        return cityBulkWriteRepositoryImpl.bulkInsertCities(cities);
+    public Integer bulkInsertCities(List<CityDTO> cityDTOs) {
+        return cityBulkWriteRepositoryImpl.bulkInsertCities(CityMapper.mapCitiesToCityDTOs(cityDTOs));
     }
 
     @Override

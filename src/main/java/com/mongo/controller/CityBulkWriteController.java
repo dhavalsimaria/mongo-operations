@@ -1,6 +1,6 @@
 package com.mongo.controller;
 
-import com.mongo.entity.City;
+import com.mongo.entity.CityDTO;
 import com.mongo.service.CityBulkWriteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +18,8 @@ public class CityBulkWriteController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> bulkInsert(@RequestBody List<City> cities) {
-        return ResponseEntity.ok(cityBulkWriteService.bulkInsertCities(cities));
+    public ResponseEntity<Integer> bulkInsert(@RequestBody List<CityDTO> cityDTOs) {
+        return ResponseEntity.ok(cityBulkWriteService.bulkInsertCities(cityDTOs));
     }
 
     @DeleteMapping("/list-of-ids")

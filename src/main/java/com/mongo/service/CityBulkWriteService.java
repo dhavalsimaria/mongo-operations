@@ -1,11 +1,11 @@
 package com.mongo.service;
 
-import com.mongo.entity.City;
+import com.mongo.entity.CityDTO;
 
 import java.util.List;
 
 public interface CityBulkWriteService {
-    Integer bulkInsertCities(List<City> cities);
+    Integer bulkInsertCities(List<CityDTO> cityDTOs);
 
     Integer bulkDeleteCitiesUsingListOfIds(List<String> ids);
 

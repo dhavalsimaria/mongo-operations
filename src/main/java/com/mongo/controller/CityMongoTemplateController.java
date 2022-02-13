@@ -1,6 +1,7 @@
 package com.mongo.controller;
 
 import com.mongo.entity.City;
+import com.mongo.entity.CityDTO;
 import com.mongo.service.CityMongoTemplateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +24,13 @@ public class CityMongoTemplateController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<City> createUsingInsert(@RequestBody City city) {
-        return ResponseEntity.ok(cityMongoTemplateService.insertCity(city));
+    public ResponseEntity<City> createUsingInsert(@RequestBody CityDTO cityDTO) {
+        return ResponseEntity.ok(cityMongoTemplateService.insertCity(cityDTO));
     }
 
     @PutMapping("/save")
-    public ResponseEntity<City> createOrUpdate(@RequestBody City city) {
-        return ResponseEntity.ok(cityMongoTemplateService.saveCity(city));
+    public ResponseEntity<City> createOrUpdate(@RequestBody CityDTO cityDTO) {
+        return ResponseEntity.ok(cityMongoTemplateService.saveCity(cityDTO));
     }
 
     @PutMapping("/update-all")
@@ -47,9 +48,14 @@ public class CityMongoTemplateController {
         return ResponseEntity.ok(cityMongoTemplateService.findAndModifyCityName(cityOldName, cityNewName));
     }
 
+    @PutMapping("/find-and-replace")
+    public ResponseEntity<City> findAndReplaceUsingCityName(@RequestParam String oldCityName, @RequestBody CityDTO newCityDTO) {
+        return ResponseEntity.ok(cityMongoTemplateService.findAndReplaceUsingCityName(oldCityName, newCityDTO));
+    }
+
     @PutMapping("/upsert")
-    public ResponseEntity<String> upsert(@RequestBody City city) {
-        return ResponseEntity.ok(cityMongoTemplateService.upsertCity(city));
+    public ResponseEntity<String> upsert(@RequestBody CityDTO cityDTO) {
+        return ResponseEntity.ok(cityMongoTemplateService.upsertCity(cityDTO));
     }
 
     @DeleteMapping("/find-and-remove/{id}")
