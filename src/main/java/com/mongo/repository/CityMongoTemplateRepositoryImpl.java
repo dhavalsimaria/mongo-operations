@@ -1,8 +1,6 @@
 package com.mongo.repository;
 
 import com.mongo.entity.City;
-import com.mongo.entity.CityDTO;
-import com.mongo.utility.CityMapper;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -49,7 +47,7 @@ public class CityMongoTemplateRepositoryImpl implements CityMongoTemplateReposit
     public City updateCityNameUsingFindAndModify(String oldCityName, String newCityName) {
         Query query = new Query().addCriteria(Criteria.where("cityName").is(oldCityName));
         Update updateDefinition = new Update().set("cityName", newCityName);
-        FindAndModifyOptions options = new FindAndModifyOptions().returnNew(true);
+        FindAndModifyOptions options = new FindAndModifyOptions().returnNew(true).upsert(true);
 
         return mongoTemplate.findAndModify(query, updateDefinition, options, City.class);
     }
