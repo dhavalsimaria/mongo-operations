@@ -5,9 +5,15 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main, feature/* ]
-  pull_request:
     branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+    
+env:
+  REGISTRY_NAME: dhs2112
+  CLUSTER_NAME: test-cluster
+  CLUSTER_RESOURCE_GROUP: spring-boot-rg
+  APP_NAME: mongo-operations
 
 jobs:
   build:
@@ -16,11 +22,25 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 11
+    - name: Set up JDK 8
       uses: actions/setup-java@v3
       with:
-        java-version: '11'
+        java-version: '8'
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - uses: actions/checkout@main
+    
+    # Connect to Azure Container Registry (ACR)
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }} 
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    # Container build and push to a Azure Container Registry (ACR)
+    - run: |
+        docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }} .
+        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+      #working-directory: .
