@@ -1,14 +1,17 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: Java CI with Maven
+name: Build & Push Docker image to ACR
 
 on:
   push:
     branches: [ main ]
 #  pull_request:
 #    branches: [ main ]
-    
+
+  # Dependency to a forking workflow
+  workflow_run:
+    workflows: ["Maven Build"]
+    type:
+      - complete
+
 env:
   REGISTRY_NAME: dhs2112
   CLUSTER_NAME: test-cluster
@@ -21,24 +24,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 8
-      uses: actions/setup-java@v3
-      with:
-        java-version: '8'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
     - uses: actions/checkout@main
-    
+
     # Connect to Azure Container Registry (ACR)
     - uses: azure/docker-login@v1
       with:
         login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
-        username: ${{ secrets.REGISTRY_USERNAME }} 
+        username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-    
+
     # Container build and push to a Azure Container Registry (ACR)
     - run: |
         docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }} .
