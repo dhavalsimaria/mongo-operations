@@ -1,7 +1,7 @@
 FROM maven:3.6.0-jdk-8-slim AS build
 COPY src /mongo-operations/src
 COPY pom.xml /mongo-operations
-RUN mvn -f /mongo-operations/pom.xml clean package
+RUN mvn -f /mongo-operations/pom.xml clean package -Dmaven.test.skip=true
 
 FROM openjdk:8-jdk-alpine
 ARG JAR_FILE=target/MongoOperations-1.0.jar
