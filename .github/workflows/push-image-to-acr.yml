@@ -1,0 +1,40 @@
+name: Build & Push Docker image to ACR
+
+on:
+  push:
+    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+
+  # Dependency to a forking workflow
+  workflow_run:
+    workflows: ["Maven Build"]
+    type:
+      - complete
+
+env:
+  REGISTRY_NAME: dhs2112
+  CLUSTER_NAME: test-cluster
+  CLUSTER_RESOURCE_GROUP: spring-boot-rg
+  APP_NAME: mongo-operations
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@main
+
+    # Connect to Azure Container Registry (ACR)
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    # Container build and push to a Azure Container Registry (ACR)
+    - run: |
+        docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }} .
+        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+      #working-directory: .
