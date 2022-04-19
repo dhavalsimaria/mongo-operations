@@ -17,9 +17,6 @@ env:
   CLUSTER_NAME: test-cluster
   CLUSTER_RESOURCE_GROUP: spring-boot-rg
   APP_NAME: mongo-operations
-  MINOR_VERSION: $($(echo date +"%y"))$(WEEK=$((10#$(date +"%V")+1)); if [ $(($WEEK%2)) -eq 0 ]; then if [ ${#WEEK} = 1 ]; then echo "0${WEEK}"; else echo $WEEK; fi; else WEEK=$(($WEEK -1)); if [ ${#WEEK} = 1 ]; then echo "0${WEEK}"; else echo $WEEK; fi; fi)
-  MAJOR_VERSION: 1
-  ACTUAL_VERSION: MAJOR_VERSION.MINOR_VERSION.1
 
 jobs:
   build:
@@ -38,6 +35,10 @@ jobs:
 
     # Container build and push to a Azure Container Registry (ACR)
     - run: |
-        docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ env.ACTUAL_VERSION }} .
-        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ env.ACTUAL_VERSION }}
+        export MINOR_VERSION: $($(echo date +"%y"))$(WEEK=$((10#$(date +"%V")+1)); if [ $(($WEEK%2)) -eq 0 ]; then if [ ${#WEEK} = 1 ]; then echo "0${WEEK}"; else echo $WEEK; fi; else WEEK=$(($WEEK -1)); if [ ${#WEEK} = 1 ]; then echo "0${WEEK}"; else echo $WEEK; fi; fi)
+        export MAJOR_VERSION: 1
+        export ACTUAL_VERSION: $MAJOR_VERSION.$MINOR_VERSION.1
+        echo $ACTUAL_VERSION
+        docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:1.0 .
+        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:1.0
       #working-directory: .
