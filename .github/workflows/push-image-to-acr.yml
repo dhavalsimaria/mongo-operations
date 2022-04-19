@@ -28,12 +28,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@main
-    - name: Print next version
-      run: |
-        echo ${{ env.ACTUAL_VERSION }}
 
     # Connect to Azure Container Registry (ACR)
-    - name: Connect to ACR
     - uses: azure/docker-login@v1
       with:
         login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
@@ -41,7 +37,6 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     # Container build and push to a Azure Container Registry (ACR)
-    - name: Build and Push image to ACR
     - run: |
         docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ env.ACTUAL_VERSION }} .
         docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ env.ACTUAL_VERSION }}
