@@ -39,6 +39,6 @@ jobs:
         export MAJOR_VERSION=1
         export ACTUAL_VERSION=$MAJOR_VERSION.$MINOR_VERSION.1
         echo $ACTUAL_VERSION
-        docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:1.0 .
-        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:1.0
+        docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${ACTUAL_VERSION} .
+        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${ACTUAL_VERSION}
       #working-directory: .
