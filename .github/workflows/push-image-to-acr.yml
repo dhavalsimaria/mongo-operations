@@ -19,7 +19,7 @@ env:
   APP_NAME: mongo-operations
   MINOR_VERSION: $($(echo date +"%y"))$(WEEK=$((10#$(date +"%V")+1)); if [ $(($WEEK%2)) -eq 0 ]; then if [ ${#WEEK} = 1 ]; then echo "0${WEEK}"; else echo $WEEK; fi; else WEEK=$(($WEEK -1)); if [ ${#WEEK} = 1 ]; then echo "0${WEEK}"; else echo $WEEK; fi; fi)
   MAJOR_VERSION: 1
-  ACTUAL_VERSION: "$MAJOR_VERSION.$MINOR_VERSION.1"
+  ACTUAL_VERSION: MAJOR_VERSION.MINOR_VERSION.1
 
 jobs:
   build:
