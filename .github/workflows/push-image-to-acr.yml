@@ -42,3 +42,63 @@ jobs:
         docker build -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${ACTUAL_VERSION} .
         docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${ACTUAL_VERSION}
       #working-directory: .
+      
+    - name: Azure Kubernetes set context
+      uses: Azure/aks-set-context@v2.1
+      with:
+        # Resource Group Name
+        resource-group: spring-boot-rg
+        # AKS Cluster Name
+        cluster-name: test-cluster
+        # AKS Cluster Subscription
+        #subscription: # optional
+        # Get cluster admin credentials. Values: true or false
+        #admin: # optional
+        
+#    - name: Create secret in Kubernetes cluster
+#      uses: Azure/k8s-create-secret@v2.1
+#      with:
+#        # Choose the target Kubernetes namespace. If the namespace is not provided, the commands will run in the default namespace.
+#        #namespace: # optional
+#        # Type of Kubernetes secret. For example, docker-registry or generic
+#        secret-type: # default is docker-registry
+#        # Name of the secret. You can use this secret name in the Kubernetes YAML configuration file.
+#        secret-name: 
+#        # JSON object with plaintext string data for secret ex: {"key1":"value1"}
+#        string-data: # optional
+#        # JSON object with the serialized form of the secret data in a base64 encoded string ex: {"key1":"[base64 encoded data]"}
+#        data: # optional
+#        
+#    - name: Deploy to Kubernetes cluster
+#      uses: Azure/k8s-deploy@v3.1
+#      with:
+#        # Choose the target Kubernetes namespace. If the namespace is not provided, the commands will run in the default namespace.
+#        namespace: # optional
+#        # Path to the manifest files which will be used for deployment.
+#        manifests: 
+#        # Fully qualified resource URL of the image(s) to be used for substitutions on the manifest files Example: contosodemo.azurecr.io/helloworld:test
+#        images: # optional
+#        # Name of a docker-registry secret that has already been set up within the cluster. Each of these secret names are added under imagePullSecrets field for the workloads found in the input manifest files
+#        imagepullsecrets: # optional
+#        # Switch whether to pull the images from the registry before deployment to find out Dockerfile's path in order to add it to the annotations
+#        pull-images: # optional, default is true
+#        # Deployment strategy to be used. Allowed values are none, canary and blue-green
+#        strategy: # optional, default is none
+#        # Route based on service, ingress or SMI for blue-green strategy
+#        route-method: # optional, default is service
+#        # Indicates the buffer time in minutes before the switch is made to the green version (max is 300 min ie. 5hrs)
+#        version-switch-buffer: # optional, default is 0
+#        # Traffic split method to be used. Allowed values are pod and smi
+#        traffic-split-method: # optional, default is pod
+#        # Baseline and canary replicas count. Valid value between 0 to 100 (inclusive)
+#        baseline-and-canary-replicas: # optional, default is 0
+#        # Percentage of traffic redirect to canary deployment
+#        percentage: # optional, default is 0
+#        # deploy, promote, or reject
+#        action: # default is deploy
+#        # Deploy when a previous deployment already exists. If true then --force argument is added to the apply command
+#        force: # optional
+#        # Github token
+#        token: # default is ${{ github.token }}
+#        # Annotate the target namespace
+#        annotate-namespace: # optional, default is true
