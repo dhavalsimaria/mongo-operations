@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: mongo-operations
-          image: mongo-operations/1.2216.76
+          image: dhs2112.azurecr.io/mongo-operations
           resources:
             limits:
               memory: "128Mi"
