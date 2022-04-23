@@ -16,6 +16,8 @@ env:
   REGISTRY_NAME: dhs2112
   CLUSTER_NAME: test-cluster
   CLUSTER_RESOURCE_GROUP: spring-boot-rg
+  NAMESPACE: test-ns
+  SECRET: { secret-name }
   APP_NAME: mongo-operations
 
 jobs:
@@ -46,29 +48,28 @@ jobs:
     - name: Azure Kubernetes set context
       uses: Azure/aks-set-context@v2.1
       with:
-        # Resource Group Name
-        resource-group: spring-boot-rg
-        # AKS Cluster Name
-        cluster-name: test-cluster
-        # AKS Cluster Subscription
-        #subscription: # optional
-        # Get cluster admin credentials. Values: true or false
-        #admin: # optional
-        
-#    - name: Create secret in Kubernetes cluster
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+
+      # Create namespace if doesn't exist
+    - run: |
+        kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
+    
+    - run: |
+        kubectl create secret docker-registry test-ns --namespace ${{ env.NAMESPACE }} --docker-server=${{ env.REGISTRY_NAME }}.azurecr.io --docker-username=${{ secrets.REGISTRY_USERNAME }} --docker-password=${{ secrets.REGISTRY_PASSWORD }}
+
+#    - name: Create image pull secret for ACR
 #      uses: Azure/k8s-create-secret@v2.1
 #      with:
-#        # Choose the target Kubernetes namespace. If the namespace is not provided, the commands will run in the default namespace.
-#        #namespace: # optional
-#        # Type of Kubernetes secret. For example, docker-registry or generic
-#        secret-type: # default is docker-registry
-#        # Name of the secret. You can use this secret name in the Kubernetes YAML configuration file.
-#        secret-name: 
-#        # JSON object with plaintext string data for secret ex: {"key1":"value1"}
-#        string-data: # optional
-#        # JSON object with the serialized form of the secret data in a base64 encoded string ex: {"key1":"[base64 encoded data]"}
-#        data: # optional
-#        
+#        container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
+#        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+#        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+#       secret-name: ${{ env.SECRET }}
+#        namespace: ${{ env.NAMESPACE }}
+#        arguments: --force true
+
+
 #    - name: Deploy to Kubernetes cluster
 #      uses: Azure/k8s-deploy@v3.1
 #      with:
