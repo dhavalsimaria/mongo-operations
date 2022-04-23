@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-operations
+spec:
+  selector:
+    matchLabels:
+      app: mongo-operations
+  template:
+    metadata:
+      labels:
+        app: mongo-operations
+    spec:
+      containers:
+        - name: mongo-operations
+          image: mongo-operations/1.2216.76
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
