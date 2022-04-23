@@ -57,7 +57,7 @@ jobs:
         kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
     
     - run: |
-        kubectl create secret docker-registry test-ns --namespace ${{ env.NAMESPACE }} --docker-server=${{ env.REGISTRY_NAME }}.azurecr.io --docker-username=${{ secrets.REGISTRY_USERNAME }} --docker-password=${{ secrets.REGISTRY_PASSWORD }}
+        kubectl create secret docker-registry test-secret --namespace ${{ env.NAMESPACE }} --docker-server=${{ env.REGISTRY_NAME }}.azurecr.io --docker-username=${{ secrets.REGISTRY_USERNAME }} --docker-password=${{ secrets.REGISTRY_PASSWORD }}
 
 #    - name: Create image pull secret for ACR
 #      uses: Azure/k8s-create-secret@v2.1
