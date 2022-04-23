@@ -17,7 +17,7 @@ env:
   CLUSTER_NAME: test-cluster
   CLUSTER_RESOURCE_GROUP: spring-boot-rg
   NAMESPACE: test-ns
-  #SECRET: { secret-name }
+  SECRET: test-secret
   APP_NAME: mongo-operations
 
 jobs:
@@ -56,18 +56,30 @@ jobs:
     - run: |
         kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
     
-    - run: |
-        kubectl create secret docker-registry test-secret --namespace ${{ env.NAMESPACE }} --docker-server=${{ env.REGISTRY_NAME }}.azurecr.io --docker-username=${{ secrets.REGISTRY_USERNAME }} --docker-password=${{ secrets.REGISTRY_PASSWORD }}
+#    - run: |
+#        kubectl create secret docker-registry test-secret --namespace ${{ env.NAMESPACE }} --docker-server=${{ env.REGISTRY_NAME }}.azurecr.io --docker-username=${{ secrets.REGISTRY_USERNAME }} --docker-password=${{ secrets.REGISTRY_PASSWORD }}
 
-#    - name: Create image pull secret for ACR
-#      uses: Azure/k8s-create-secret@v2.1
+    - name: Create image pull secret for ACR
+      uses: Azure/k8s-create-secret@v1
+      with:
+        container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
+        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+        secret-name: ${{ env.SECRET }}
+        namespace: ${{ env.NAMESPACE }}
+        arguments: --force true
+        
+    # Deploy app to AKS
+#    - uses: azure/k8s-deploy@v1
 #      with:
-#        container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
-#        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-#        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-#       secret-name: ${{ env.SECRET }}
+#        manifests: |
+#          ${{ github.workspace }}/manifests/deployment.yaml
+#          ${{ github.workspace }}/manifests/service.yaml
+#        images: |
+#          ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+#        imagepullsecrets: |
+#          ${{ env.SECRET }}
 #        namespace: ${{ env.NAMESPACE }}
-#        arguments: --force true
 
 
 #    - name: Deploy to Kubernetes cluster
