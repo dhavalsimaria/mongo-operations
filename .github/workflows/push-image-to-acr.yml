@@ -17,7 +17,7 @@ env:
   CLUSTER_NAME: test-cluster
   CLUSTER_RESOURCE_GROUP: spring-boot-rg
   NAMESPACE: test-ns
-  SECRET: { secret-name }
+  #SECRET: { secret-name }
   APP_NAME: mongo-operations
 
 jobs:
