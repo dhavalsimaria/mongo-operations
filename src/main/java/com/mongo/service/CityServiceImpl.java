@@ -2,6 +2,7 @@ package com.mongo.service;
 
 import com.mongo.entity.City;
 import com.mongo.entity.CityDTO;
+import com.mongo.entity.CityResponseDTO;
 import com.mongo.entity.Coordinates;
 import com.mongo.repository.CityRepository;
 import com.mongo.utility.CityMapper;
@@ -44,6 +45,11 @@ public class CityServiceImpl implements CityService{
     @Override
     public List<City> getAllCities() {
         return cityRepository.findAll();
+    }
+
+    @Override
+    public List<CityResponseDTO> getAllCitiesWithMunicipalCorporations() {
+        return cityRepository.findCityWithMunicipalCorporationDetails();
     }
 
     @Override
