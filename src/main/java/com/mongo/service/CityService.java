@@ -2,6 +2,7 @@ package com.mongo.service;
 
 import com.mongo.entity.City;
 import com.mongo.entity.CityDTO;
+import com.mongo.entity.CityResponseDTO;
 import com.mongo.entity.Coordinates;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface CityService {
     void deleteAll();
 
     List<City> findByCoordinatesWithin(List<Coordinates> polygonCoordinates);
+
+    List<CityResponseDTO> getAllCitiesWithMunicipalCorporations();
 }
